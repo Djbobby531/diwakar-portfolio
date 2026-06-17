@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Resume — Diwakar Jilakara | Data Engineer</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --text: #0d1117;
+        --muted: #4a5568;
+        --light: #6b7280;
+        --line: #dde1e9;
+        --accent: #0e7a72;
+        --accent-bg: rgba(14,122,114,0.07);
+        --bg: #f8f6f2;
+        --bg-2: #ffffff;
+        --radius: 8px;
+        font-family: 'Plus Jakarta Sans', Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body { background: var(--bg); color: var(--text); line-height: 1.6; }
+
+      /* ── TOP BAR ── */
+      .top-bar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px clamp(16px, 4vw, 52px);
+        background: rgba(248,246,242,0.9);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .top-bar a.back {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 0.88rem;
+        text-decoration: none;
+        transition: opacity 150ms;
+      }
+      .top-bar a.back:hover { opacity: 0.7; }
+
+      .top-bar-right { display: flex; align-items: center; gap: 12px; }
+
+      .top-bar-right a {
+        color: var(--muted);
+        font-size: 0.86rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: color 150ms;
+      }
+      .top-bar-right a:hover { color: var(--accent); }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--bg-2);
+        color: var(--text);
+        font-family: inherit;
+        font-size: 0.84rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: border-color 150ms, background 150ms, color 150ms;
+        text-decoration: none;
+      }
+      .btn:hover { border-color: var(--accent); background: var(--accent-bg); color: var(--accent); }
+      .btn.primary { background: var(--accent); color: #fff; border-color: transparent; }
+      .btn.primary:hover { background: #0a6560; }
+
+      /* ── LAYOUT ── */
+      main {
+        width: min(900px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 52px 0 80px;
+      }
+
+      /* ── HEADER ── */
+      .resume-header {
+        padding-bottom: 28px;
+        border-bottom: 2px solid var(--text);
+        margin-bottom: 28px;
+      }
+
+      .resume-header h1 {
+        font-size: clamp(2.2rem, 6vw, 3.6rem);
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        margin-bottom: 4px;
+      }
+
+      .resume-header .title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--accent);
+        margin-bottom: 16px;
+      }
+
+      .contact-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 20px;
+        font-size: 0.88rem;
+        color: var(--muted);
+      }
+
+      .contact-row a { color: var(--accent); font-weight: 600; text-decoration: none; }
+      .contact-row a:hover { text-decoration: underline; }
+
+      /* ── SECTIONS ── */
+      .section {
+        margin-bottom: 30px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid var(--line);
+      }
+      .section:last-child { border-bottom: none; margin-bottom: 0; }
+
+      .section-title {
+        font-size: 0.72rem;
+        font-weight: 900;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 18px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      p { color: var(--muted); margin-bottom: 0; }
+
+      /* ── ACHIEVEMENTS ── */
+      .achievements { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+      .achievements li {
+        padding-left: 20px;
+        position: relative;
+        color: var(--muted);
+        font-size: 0.95rem;
+        line-height: 1.65;
+      }
+      .achievements li::before {
+        content: '▸';
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+        font-size: 0.8rem;
+        top: 3px;
+      }
+      .achievements li strong { color: var(--text); }
+
+      /* ── SKILLS TABLE ── */
+      .skills-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+      .skills-table tr + tr td { padding-top: 8px; }
+      .skills-table td:first-child {
+        width: 160px;
+        font-weight: 800;
+        color: var(--text);
+        vertical-align: top;
+        padding-right: 20px;
+        white-space: nowrap;
+      }
+      .skills-table td:last-child { color: var(--muted); line-height: 1.55; }
+
+      /* ── EXPERIENCE / PROJECTS ── */
+      .entry { margin-bottom: 24px; }
+      .entry:last-child { margin-bottom: 0; }
+
+      .entry-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 2px;
+      }
+
+      .entry-company {
+        font-weight: 900;
+        font-size: 1rem;
+        color: var(--text);
+      }
+
+      .entry-location {
+        font-size: 0.84rem;
+        color: var(--light);
+      }
+
+      .entry-role-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-bottom: 10px;
+      }
+
+      .entry-role {
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--accent);
+      }
+
+      .entry-dates {
+        font-size: 0.84rem;
+        color: var(--light);
+        font-style: italic;
+      }
+
+      .entry-bullets { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+      .entry-bullets li {
+        padding-left: 18px;
+        position: relative;
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.6;
+      }
+      .entry-bullets li::before {
+        content: '•';
+        position: absolute;
+        left: 4px;
+        color: var(--accent);
+      }
+      .entry-bullets li strong { color: var(--text); }
+
+      /* ── PROJECTS ── */
+      .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+      .proj-card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 18px 20px;
+        background: var(--bg-2);
+      }
+
+      .proj-type {
+        font-size: 0.72rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--accent);
+        margin-bottom: 6px;
+      }
+
+      .proj-name {
+        font-weight: 800;
+        font-size: 0.97rem;
+        color: var(--text);
+        margin-bottom: 8px;
+      }
+
+      .proj-stack {
+        font-size: 0.78rem;
+        color: var(--light);
+        font-style: italic;
+        margin-bottom: 10px;
+      }
+
+      .proj-desc {
+        font-size: 0.9rem;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      /* ── TAGS ── */
+      .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+      .tag-cloud span {
+        display: inline-block;
+        padding: 5px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--text);
+        background: var(--bg-2);
+      }
+
+      /* ── EDU ── */
+      .edu-entry { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 4px; }
+      .edu-entry .degree { font-weight: 800; font-size: 1rem; }
+      .edu-entry .school { font-size: 0.9rem; color: var(--muted); margin-top: 2px; }
+      .edu-dates { font-size: 0.84rem; color: var(--light); font-style: italic; }
+
+      /* ── PRINT ── */
+      @media print {
+        .top-bar { display: none; }
+        body { background: white; }
+        main { width: 100%; padding: 28px 40px 40px; }
+        .proj-card { border-color: #ddd; }
+        .section { page-break-inside: avoid; }
+        .entry { page-break-inside: avoid; }
+      }
+
+      @media (max-width: 680px) {
+        .project-grid { grid-template-columns: 1fr; }
+        .skills-table td:first-child { width: auto; display: block; margin-bottom: 2px; }
+        .skills-table td { display: block; }
+        .skills-table tr + tr td:first-child { padding-top: 12px; }
+        .top-bar .btn.primary span { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top bar — hidden on print -->
+    <div class="top-bar">
+      <a href="index.html" class="back">
+        <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M16 10H4M10 4l-6 6 6 6"/></svg>
+        Back to Portfolio
+      </a>
+      <div class="top-bar-right">
+        <a href="https://linkedin.com/in/jilakara-diwakar-b45699225" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://github.com/Djbobby531" target="_blank" rel="noreferrer">GitHub</a>
+        <button class="btn primary" onclick="window.print()" type="button">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5 4v3H4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h1v2a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-2h1a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-1V4a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1zm2 0h6v3H7V4zm-1 9h8v4H6v-4zm9-5a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+          <span>Save as PDF</span>
+        </button>
+      </div>
+    </div>
+
+    <main>
+      <!-- ── HEADER ── -->
+      <header class="resume-header">
+        <h1>Diwakar Jilakara</h1>
+        <p class="title">Data Engineer</p>
+        <div class="contact-row">
+          <span>(806) 730-5754</span>
+          <a href="mailto:diwakar17531@gmail.com">diwakar17531@gmail.com</a>
+          <a href="https://linkedin.com/in/jilakara-diwakar-b45699225" target="_blank" rel="noreferrer">linkedin.com/in/jilakara-diwakar-b45699225</a>
+          <a href="https://github.com/Djbobby531" target="_blank" rel="noreferrer">github.com/Djbobby531</a>
+        </div>
+      </header>
+
+      <!-- ── SUMMARY ── -->
+      <section class="section">
+        <h2 class="section-title">Summary</h2>
+        <p>
+          Data Engineer with <strong style="color:var(--text)">4+ years</strong> building <strong style="color:var(--text)">cloud-native ETL/ELT pipelines, distributed data platforms, and multi-tenant integration systems</strong> on Azure and AWS. Delivered pipelines processing <strong style="color:var(--text)">750K+ records/day at 99.99% uptime</strong>; reduced manual data transfer effort by <strong style="color:var(--text)">70%</strong> through scalable, connector-first architecture. Deep expertise in <strong style="color:var(--text)">PySpark, Azure Data Factory, schema validation, and data migration at scale</strong>.
+        </p>
+      </section>
+
+      <!-- ── KEY ACHIEVEMENTS ── -->
+      <section class="section">
+        <h2 class="section-title">Key Achievements</h2>
+        <ul class="achievements">
+          <li><strong>70% reduction in manual data transfer effort</strong> — architected a multi-tenant SaaS integration platform with 15+ database connectors, supporting both incremental and full-load strategies with zero data loss guarantees.</li>
+          <li><strong>99.99% uptime on 750K+ records/day</strong> — engineered ADF pipelines and C# APIs for Green Dot Bank's full on-prem SQL Server to Azure migration with near-zero downtime cutover across high-transaction workloads.</li>
+          <li><strong>35% query latency reduction</strong> — drove the architectural decision to split workloads across Azure Cosmos DB and Azure SQL Hyperscale based on transaction profile, leading the migration design end-to-end.</li>
+        </ul>
+      </section>
+
+      <!-- ── TECHNICAL SKILLS ── -->
+      <section class="section">
+        <h2 class="section-title">Technical Skills</h2>
+        <table class="skills-table">
+          <tbody>
+            <tr>
+              <td>Data Engineering</td>
+              <td>PySpark, Azure Data Factory (ADF), Apache Kafka, Apache Airflow, ETL/ELT pipelines, schema validation, data migration, incremental/full-load strategies</td>
+            </tr>
+            <tr>
+              <td>Cloud &amp; Storage</td>
+              <td>Microsoft Azure (ADF, Blob Storage, Cosmos DB, SQL Hyperscale, Data Lake), AWS (S3, Glue), Terraform, Docker, Kubernetes</td>
+            </tr>
+            <tr>
+              <td>Languages</td>
+              <td>Python, SQL, PySpark, Bash, TypeScript</td>
+            </tr>
+            <tr>
+              <td>Databases</td>
+              <td>SQL Server, PostgreSQL, Azure Cosmos DB, Azure SQL Hyperscale, Redis — query optimization, execution plan analysis, index tuning</td>
+            </tr>
+            <tr>
+              <td>Orchestration</td>
+              <td>Apache Airflow, Azure Data Factory, job scheduling engines, real-time monitoring</td>
+            </tr>
+            <tr>
+              <td>AI / Automation</td>
+              <td>LangChain, LangGraph, RAG, Azure OpenAI — AI-driven pipeline automation</td>
+            </tr>
+            <tr>
+              <td>DevOps &amp; Methods</td>
+              <td>CI/CD, GitHub Actions, Azure DevOps, Docker, Kubernetes, Agile/Scrum, observability, IAM/RBAC</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ── EXPERIENCE ── -->
+      <section class="section">
+        <h2 class="section-title">Experience</h2>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-company">DataNue</span>
+            <span class="entry-location">Remote</span>
+          </div>
+          <div class="entry-role-row">
+            <span class="entry-role">Software Engineer — Data Platform</span>
+            <span class="entry-dates">May 2024 – Present</span>
+          </div>
+          <ul class="entry-bullets">
+            <li>Developed a <strong>multi-tenant SaaS/PaaS data integration platform</strong> end-to-end, owning the full pipeline stack from source connector design through Azure Blob Storage staging to destination writes, supporting <strong>15+ database types</strong>.</li>
+            <li>Designed a <strong>layered data validation framework</strong> covering schema, row-level, and aggregation checks across source, intermediate, and target systems enforcing zero data loss across all pipeline runs.</li>
+            <li>Developed <strong>PySpark ETL pipelines</strong> with configurable incremental and full-load strategies; built a <strong>job scheduling engine</strong> supporting automated and on-demand execution with real-time status dashboards and full audit history.</li>
+            <li>Made the architectural decision to use <strong>Azure Blob Storage as a staging layer</strong> for connector isolation, enabling independent scaling of ingestion and transformation without coupling source schema changes to downstream consumers.</li>
+            <li>Deployed <strong>LangChain/LangGraph AI agents</strong> to automate recurring data transfers, reducing manual intervention and enabling natural-language querying of pipeline job history via a <strong>GenAI chatbot</strong>.</li>
+            <li>Enforced <strong>RBAC/IAM access tiers</strong> (owner, admin, user) with JWT session management and audit logging across all pipeline and scheduler operations.</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-company">Cognizant Technology Solutions</span>
+            <span class="entry-location">Hyderabad, India</span>
+          </div>
+          <div class="entry-role-row">
+            <span class="entry-role">Software Engineer — Data &amp; Cloud Migration</span>
+            <span class="entry-dates">Oct 2021 – Jun 2023</span>
+          </div>
+          <ul class="entry-bullets">
+            <li>Developed the <strong>data migration design</strong> for Green Dot Bank's on-premises SQL Server to Azure Cloud, owning pipeline architecture in <strong>Azure Data Factory</strong> with full and incremental load strategies and near-zero downtime cutover.</li>
+            <li>Drove the workload segmentation decision: migrated high-transaction tables to <strong>Azure Cosmos DB</strong> and low-transaction tables to <strong>Azure SQL Hyperscale</strong>, achieving a <strong>35% reduction in query latency</strong>.</li>
+            <li>Built <strong>C# ASP.NET APIs</strong> on Azure processing <strong>750K+ records/day at 99.99% uptime</strong>, integrated with Azure Cognitive Services for intelligent document extraction.</li>
+            <li>Optimized <strong>SQL Server schemas, stored procedures, and indexes</strong> via execution plan analysis, measurably reducing long-running query times and improving analytics throughput.</li>
+            <li>Automated infrastructure provisioning with <strong>Terraform, Docker, and Kubernetes</strong> inside CI/CD pipelines; established unit and integration testing standards across the team.</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-company">Texas Tech University</span>
+            <span class="entry-location">Lubbock, TX</span>
+          </div>
+          <div class="entry-role-row">
+            <span class="entry-role">Student Assistant — Data &amp; UX Support</span>
+            <span class="entry-dates">Sep 2023 – May 2024</span>
+          </div>
+          <ul class="entry-bullets">
+            <li>Maintained data integrity across university platforms and documented software defects, contributing to iterative fixes that <strong>reduced support ticket volume by 20%</strong>.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ── PROJECTS ── -->
+      <section class="section">
+        <h2 class="section-title">Projects</h2>
+        <div class="project-grid">
+          <div class="proj-card">
+            <p class="proj-type">Data Platform</p>
+            <p class="proj-name">Data Migration Control Plane</p>
+            <p class="proj-stack">TypeScript · React · FastAPI · PostgreSQL · Docker</p>
+            <p class="proj-desc">Enterprise data migration prototype with a FastAPI pipeline backend, drag-and-drop workflow builder, schema validation engine, and AI-assisted operations running on a Docker Compose stack spanning PostgreSQL, Redis, and Azurite.</p>
+          </div>
+          <div class="proj-card">
+            <p class="proj-type">AI Application</p>
+            <p class="proj-name">ChessIQ — AI Chess Coaching App</p>
+            <p class="proj-stack">Python · FastAPI · Stockfish · LangChain · React</p>
+            <p class="proj-desc">Full-stack AI coaching app combining Stockfish depth analysis with LangChain LLM explanations; recognizes 500+ named openings and delivers scorecards, board review, and natural-language Q&amp;A.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── EDUCATION ── -->
+      <section class="section">
+        <h2 class="section-title">Education</h2>
+        <div class="edu-entry">
+          <div>
+            <p class="degree">Master of Science, Computer Science</p>
+            <p class="school">Texas Tech University — Lubbock, TX</p>
+          </div>
+          <span class="edu-dates">Aug 2023 – May 2025</span>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
